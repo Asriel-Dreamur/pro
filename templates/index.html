@@ -1,0 +1,32 @@
+<!-- Подключение базового шаблона -->
+
+{% extends 'base.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Посты пользователей</h1>
+    <div class="row">
+        {% for post in posts %}
+        <!-- Карточка одоного поста пользователей -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.text }}</p>
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="card-text text-secondary">Дата публикации: {{ post.at_publish }}</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="card-text">Автор: <a href="/profile/{{post.author_id}}">{{ post.author_username }}</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- таких карточек много... -->
+        {% endfor %}
+    <p class="card-text">Количество публикаций: {{ posts|length }}</p>
+    </div>
+{% endblock %}
