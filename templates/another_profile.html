@@ -1,0 +1,54 @@
+<!-- Подключение базового шаблона -->
+{% extends 'base.html' %}
+
+{% block title %}Профиль пользователя{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card mt-5">
+            <div class="card-header">
+                Профиль пользователя
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Имя пользователя: {{ author.username }}</h5>
+                <p class="card-text">Количество публикаций:
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ posts|length }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        {% for post in posts%}
+                        <li><a class="dropdown-item" href="#{{ post.id }}">{{ post.id }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Список карточек публикаций -->
+{% for post in posts%}
+<!-- Карточка одоного поста пользователя -->
+<div class="card mb-3" id="{{ post.id }}">
+    <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <div class="image-container bordered-image">
+            <img src="{{ post.url }}" style="width: 100%;">
+        </div>
+        <p class="card-text">{{ post.text }}</p>
+        <p class="card-text text-secondary"> Дата публикации: {{ post.at_publish }}</p>
+    </div>
+</div>
+<!-- таких карточек много... -->
+{% endfor %}
+
+</div>
+</div>
+{% endblock %}
